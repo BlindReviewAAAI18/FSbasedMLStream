@@ -40,10 +40,8 @@ ed in the feature selection.</P>
 
 <P>Second, our approach can detect concept drifts hidden in
 multi-label data streams. To track concept drifts hidden in
-multi-label data streams, we propose a concept drifting de-
-tection method based on the label distribution and the fea-
-ture distribution. It is capable of capturing concept drift-
-s in multi-label data streams effectively. Contrary to the
+multi-label data streams, we propose a concept drifting detection method based on the label distribution and the fea-
+ture distribution. It is capable of capturing concept drifts in multi-label data streams effectively. Contrary to the
 classification-error based concept drifting detection method
 in the data stream classification such as (Gama et al. 2014;
 Frias-Blanco et al. 2015), we define the difference of data
@@ -51,18 +49,14 @@ distributions between two adjoining data chunks, and then
 detect whether concept drifts occur due to the changing of
 the label distribution or the feature distribution.</P>
 
-<P>Finally, our approach can perform efficiently in the han-
-dling of multi-label data streams. The model used here is
+<P>Finally, our approach can perform efficiently in the handling of multi-label data streams. The model used here is
 incremental, the time cost is relevant to the size of a data
 chunk, while the time costs in aforementioned multi-label
 FS approaches depend on the size of the whole multi-label
-data set or the square value. Thus, our approach is more ef-
-ficient and scalable.</P>
+data set or the square value. Thus, our approach is more efficient and scalable.</P>
 <H2>Data Set </H2>
 <P><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new"> Benchark data sets</A>: In our experiments, we select six large-
-scale benchmark multi-label databases from different appli-
-cation domains to simulate the multi-label data stream. De-
+target="_new"> Benchark data sets</A>: In our experiments, we select six large scale benchmark multi-label databases from different application domains to simulate the multi-label data stream. De-
 tails of these data sets are listed in Table 1, where Label-
 Cardinality is the average number of labels in a database
 while Label-Density is the average number of labels in a
@@ -172,10 +166,11 @@ target="_new">bookmarks</B></TD>
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
 <H2>Source codes: Download</H2>
-<P>Our approach is implemented in an open-source Java library for learning from Multi-label data, called  <A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/ML_MRMR_FSClassification.java" 
-target="_new">Mulan.</P>
+<P>Our approach is implemented in an open-source Java library for learning from Multi-label data, called  <A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/index.html" 
+target="_new">Mulan </A>.</P>
 <P> Source codes of our approach include the feature selection for multi-label data stream in the <A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/feasel.rar" 
-target="_new"> feasel zip file </A>, and the ML_MRMR_FSClassification java file.</P>
+target="_new"> feasel</A> zip file, and the <A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/ML_MRMR_FSClassification.java" 
+target="_new"> ML_MRMR_FSClassification</A>  java file.</P>
 </DIV>
 <H2>Parameter Discription</H2>
 <P> 
@@ -229,4 +224,3 @@ public static void main(String[] args) throws Exception {
 		ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
 		mcf.ML_MRMR_FS_ClassifyByMulan(options);
 	}
-</P>
