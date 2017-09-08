@@ -211,21 +211,21 @@ public class ML_MRMR_FSClassification {
 		modelSize = Integer.valueOf(Utils.getOption("modelSize", comParms));
 		dataBlock = Integer.valueOf(Utils.getOption("dataBlock", comParms));
 	}
-	/**************创建目录**********************/
+	/**************CreteDirectory**********************/
 	public boolean createDir(String destDirName) {
 		File dir = new File(destDirName);
-		if (dir.exists()) {// 判断目录是否存在
-			System.out.println("创建目录失败，目标目录已存在！");
+		if (dir.exists()) {// does the directory exit
+			System.out.println("Fail to create due to existing already！");
 			return false;
 		}
-		if (!destDirName.endsWith(File.separator)) {// 结尾是否以"/"结束
+		if (!destDirName.endsWith(File.separator)) {// ending by "/" or not
 			destDirName = destDirName + File.separator;
 		}
-		if (dir.mkdirs()) {// 创建目标目录
-			System.out.println("创建目录成功！" + destDirName);
+		if (dir.mkdirs()) {// create the object directory
+			System.out.println("Success to create the directory！" + destDirName);
 			return true;
 		} else {
-			System.out.println("创建目录失败！");
+			System.out.println("Fail to create！");
 			return false;
 		}
 	}
@@ -511,7 +511,7 @@ public class ML_MRMR_FSClassification {
 	            reader = new BufferedReader(new FileReader(filePath+"\\"+srcFile));
 	            String tempString = null;
 	            int line = 1;
-	            // 一次读入一行，直到读入null为文件结束
+	            // read a line once until meeting the end of file 
 	            while ((tempString = reader.readLine()) != null) {
 	               // System.out.println("line " + line + ": " + tempString);
 	                line++;
@@ -583,19 +583,19 @@ public class ML_MRMR_FSClassification {
 	}
 	 
 	 /**
-	     * 以行为单位读取文件，常用于读面向行的格式化文件
+	     * Read file by lines;
 	     */
 	    public static void readFileByLines(String fileName) {
 	        File file = new File(fileName);
 	        BufferedReader reader = null;
 	        try {
-	            System.out.println("以行为单位读取文件内容，一次读一整行：");
+	            System.out.println("read by lines：");
 	            reader = new BufferedReader(new FileReader(file));
 	            String tempString = null;
 	            int line = 1;
-	            // 一次读入一行，直到读入null为文件结束
+	            // read a line once until meeting the end of file 
 	            while ((tempString = reader.readLine()) != null) {
-	                // 显示行号
+	                // show the line index
 	                System.out.println("line " + line + ": " + tempString);
 	                line++;
 	            }
@@ -965,72 +965,7 @@ public class ML_MRMR_FSClassification {
 		endTime = System.currentTimeMillis();
 		System.out.println("prediction time using the ensemble model of MLRDT: "+(endTime-beginTime)+"ms");
 		testBW.close();
-		
-		
-//		DataSource ds = new DataSource(filePath+"\\"+testFile);
-//		Instances testInstances = ds.getDataSet();
-//		//store the non-zero values of attributes, which will be used in the drifting detection
-//		Map<Integer, Integer> nonZeroAttrMap = new HashMap<Integer, Integer>();
-//		for ( int i = 0; i < testInstances.size(); i++ ){
-//			nonZeroAttrMap = nonZeroAttrValueStats(nonZeroAttrMap, testInstances.get(i), startIndex);
-//		}
-//		int[] curFeaInd = new int [nfea];
-//		double[] curScoreArr = new double [nfea];
-//		BufferedWriter bwFS = new BufferedWriter(new FileWriter(filePath+"/featureSelection_onTestData.txt"));
-//		FileWriter testBW = new FileWriter(filePath+"/ensemblePredict_onTestData.txt");
-//		if ( bUseRDT ){
-//			SimpleInstances fsTestInsts = featureSelectionForRDT(bwFS, curFeaInd, curScoreArr, testInstances,1, bDiscretized,attrSize);
-//			// using all ensemble model to predict
-//			LinkedList<driftInfor> similarModels = new LinkedList<driftInfor>();
-//			for ( int i = 0; i < ensembleRDTModelList.size()+1; i++ ){// the last object is not usefull
-//				driftInfor drifInforObj = new driftInfor();
-//				drifInforObj.modelIndex = i;
-//				similarModels.add(drifInforObj);
-//			}
-//			System.out.println("||predict using ensembleMode with size = "+(similarModels.size()-1));
-//			EvaluateByMLRDT evluate = new EvaluateByMLRDT();
-//			evluate.PredictByEnsembleModels(similarModels, ensembleRDTModelList, fsTestInsts, labelNum, attrSize, bAvgVoting, testBW, testBW);
-//			endTime = System.currentTimeMillis();
-//			System.out.println("prediction time using the ensemble model of MLRDT: "+(endTime-beginTime)+"ms");
-//
-//			/*LinkedList<driftInfor> similarModels = driftDetection(nonZeroAttrMapList, nonZeroAttrMap, feaIndList, feaScoreList, curFeaInd, curScoreArr,simElvType);
-//			EvaluateByMLRDT evluate = new EvaluateByMLRDT();
-//			driftInfor drifInforObj = similarModels.getLast();
-//			if (fsTestInsts != null) {
-//				FileWriter bw = new FileWriter(filePath+"/ensemblePredict_onTestData.txt");
-//				if (drifInforObj.driftType == "drift") {//no similar model, use the model with the maximum similarity to predict
-//					System.out.println("||predict using drifInforObj.modelIndex = "+drifInforObj.modelIndex);
-//					CBRRDTModel tmpModel = ensembleRDTModelList.get(drifInforObj.modelIndex);
-//					if ( tmpModel != null ){
-//						bw.write("||predicted by CBRRDTModel-"+(drifInforObj.modelIndex+1)+"\n");
-//						//testWriter.write("||predicted by CBRRDTModel-"+(drifInforObj.modelIndex+1)+"\n");
-//						evluate.PredictBySingelModel(tmpModel, fsTestInsts, labelNum, attrSize,bw,bw);
-//					}
-//				}else{ //use the similar models to predict
-//					System.out.println("||predict using ensembleMode with size = "+(similarModels.size()-1));
-//					evluate.PredictByEnsembleModels(similarModels, ensembleRDTModelList, fsTestInsts, labelNum, attrSize, bAvgVoting, bw, bw);
-//				}
-//				
-//				endTime = System.currentTimeMillis();
-//				System.out.println("prediction time using the ensemble model of MLRDT: "+(endTime-beginTime)+"ms");
-//			}//end if (fsTestInsts != null)
-//			*/
-//		}else{
-//			MultiLabelInstances fsTestInsts = featureSelection(bwFS, curFeaInd, curScoreArr, testInstances,1, bDiscretized);
-//			LinkedList<driftInfor> similarModels = driftDetectionByFeaDistr(null, nonZeroAttrMapList, nonZeroAttrMap, feaIndList, feaScoreList, curFeaInd, curScoreArr,simElvType);
-//			if (fsTestInsts != null) {
-//				Evaluator eval = new Evaluator();
-//				List<Measure> measures = InitMeasures();
-//				Evaluation result = eval.evaluateByEnsembleModels(similarModels, ensembleMLModelList, fsTestInsts, measures, bAvgVoting);
-//				testBW.write("||predicted by ensemble non-RDT-ML-Learner\n");
-//				testBW.write(result.toString());
-//				
-//			}
-//			endTime = System.currentTimeMillis();
-//			System.out.println("prediction time using the ensemble model of non-MLRDT: "+(endTime-beginTime)+"ms");
-//		}
-//		bwFS.close();
-//		testBW.close();
+	
 	 }
 	 /**
 		 * HoldOut Test using given testing data
@@ -1267,7 +1202,7 @@ public class ML_MRMR_FSClassification {
 		startIndex = attrSize - labelNum ;//- 1;--modified on  Feb. 04, 2017 
 		endIndex = attrSize - 1;
 		System.out.println("classIndex-beg-end:"+startIndex+"-"+endIndex);
-		// 构建Instances块用来进行特征选择（后面会转成MultiInstances）
+		// Generate data chunks of Instances for feature selection (we will transform them into MultiInstances）
 		DataSource ds = new DataSource(filePath + "/" + trainArff);
 		Instances data = ds.getDataSet();
 		//the number of chunks and the size of each data chunk is "dataBlock"
@@ -1491,8 +1426,8 @@ public class ML_MRMR_FSClassification {
 		return learner;
 	}
 	/**
-	 * 对Instances块进行特征选择，并返回一个属性减少的MultiLabelInstances
-	 * note:MultiLabelInstances是mulan中的多标签的类。 MultilInstances是自己实现的多标签的类
+	 * Feature selecton on Instances based chunks，return MultiLabelInstances with fewer attributes
+	 * note:MultiLabelInstances is a class of multi-label class in mulan, while MultilInstances is a multi-label class by ourselves;
 	 * 
      * @param bwFS
 	 *    		BufferedWriter, store the results of feature selection 
@@ -1518,7 +1453,7 @@ public class ML_MRMR_FSClassification {
 		mrmr.setDatas(datas);
 		long endTime = 0;
 		if (bDiscretized && discretize != 9999.0) { // modified on  Feb. 07, 2017
-			// 调用MultiInstances中的离散化的方法
+			// Call the discreterization function in MultiInstances
 			mrmr.getDatas().discretize(discretize, startIndex, endIndex);
 			endTime = System.currentTimeMillis();
 		    System.out.println("discretization time: "+(endTime-beginTime)+"ms");
@@ -1530,7 +1465,7 @@ public class ML_MRMR_FSClassification {
 	    	 feaInd[i] = tmpFeaInd[i];
 		 endTime = System.currentTimeMillis();
 	     System.out.println("feature select time on instances with size of "+blockInsts.numInstances()+":"+(endTime-beginTime)+"ms");
-		// 经过特征选择之后的名字
+		// the new file name after feature selection
 		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified on  Feb. 4
 	    // datas.getDataSet()-->is discretized data chunk
 		//String fsFile = mrmr.toArffFile(mrmr.getDatas().getDataSet(), feaInd, filePath, nChunk);//---modified on  Feb. 4
@@ -1541,8 +1476,8 @@ public class ML_MRMR_FSClassification {
 	}
 	
 	/**
-	 * 对Instances块进行特征选择，并返回一个属性减少的MultiLabelInstances
-	 * note:MultiLabelInstances是mulan中的多标签的类。 MultilInstances是自己实现的多标签的类
+	 * Feature selecton on Instances based chunks，return MultiLabelInstances with fewer attributes
+	 * note:MultiLabelInstances is a class of multi-label class in mulan, while MultilInstances is a multi-label class by ourselves;
 	 * @param labelDistVerMap
 	 * 			the label distribution for cosine computation
 	 * @param bwFS
@@ -1574,7 +1509,7 @@ public class ML_MRMR_FSClassification {
 		mrmr.setDatas(datas);
 		long endTime = 0;
 		if (bDiscretized && discretize != 9999.0) { // modified on  Feb. 07, 2017
-			// 调用MultiInstances中的离散化的方法
+			// Call the discreterization function in MultiInstances
 			mrmr.getDatas().discretize(discretize, startIndex, endIndex);
 			endTime = System.currentTimeMillis();
 		    System.out.println("discretization time: "+(endTime-beginTime)+"ms");
@@ -1621,7 +1556,7 @@ public class ML_MRMR_FSClassification {
 	     }
 		 endTime = System.currentTimeMillis();
 	     System.out.println("feature select time on instances with size of "+blockInsts.numInstances()+":"+(endTime-beginTime)+"ms");
-		// 经过特征选择之后的名字
+		//  the new file name after feature selection
 		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified on  Feb. 4
 		ArffReader rd = new ArffReader();
 		System.out.println(filePath+"\\SelectedArff\\"+fsFile);
