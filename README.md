@@ -81,109 +81,6 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>numerical</B></TD>
   </TR>
    <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">Mediamill</B></TD>
-    <TD align="center"><B>vedio</B></TD>
-    <TD align="center"><B>30993</B></TD>
-    <TD align="center"><B>12914</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>120</B></TD>
-    <TD align="center"><B>101</B></TD>
-    <TD align="center"><B>4.376</B></TD>
-    <TD align="center"><B>0.043</B></TD>
-  </TR>
-  <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">IMDB-ECC-F</B></TD>
-    <TD align="center"><B>Movie</B></TD>
-    <TD align="center"><B>76143</B></TD>
-    <TD align="center"><B>19281</B></TD>
-    <TD align="center"><B>1001</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>28</B></TD>
-    <TD align="center"><B>1.920</B></TD>
-    <TD align="center"><B>0.036</B></TD>
-  </TR>
-  <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">Corel16k010</B></TD>
-    <TD align="center"><B>images</B></TD>
-    <TD align="center"><B>13618</B></TD>
-    <TD align="center"><B>6660</B></TD>
-    <TD align="center"><B>500</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>144</B></TD>
-    <TD align="center"><B>2.834</B></TD>
-    <TD align="center"><B>0.017</B></TD>
-  </TR>
-   <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">NUS-WIDE</B></TD>
-    <TD align="center"><B>images</B></TD>
-    <TD align="center"><B>161789</B></TD>
-    <TD align="center"><B>107859</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>500</B></TD>
-    <TD align="center"><B>81</B></TD>
-    <TD align="center"><B>1.869</B></TD>
-    <TD align="center"><B>0.023</B></TD>
-  </TR>
-  <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">EUR-Lex(subject matters)</B></TD>
-    <TD align="center"><B>text</B></TD>
-    <TD align="center"><B>17414</B></TD>
-    <TD align="center"><B>1935</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>5000</B></TD>
-    <TD align="center"><B>412</B></TD>
-    <TD align="center"><B>2.213</B></TD>
-    <TD align="center"><B>0.011</B></TD>
-  </TR>
-  <TR>
-    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new">bookmarks</B></TD>
-    <TD align="center"><B>text</B></TD>
-    <TD align="center"><B>70045</B></TD>
-    <TD align="center"><B>17811</B></TD>
-    <TD align="center"><B>2150</B></TD>
-    <TD align="center"><B>0</B></TD>
-    <TD align="center"><B>208</B></TD>
-    <TD align="center"><B>2.028</B></TD>
-    <TD align="center"><B>0.010</B></TD>
-  </TR>
-</TBODY></TABLE>
-<P></P>
-       
-<DIV style="clear: both;"></DIV>
-<DIV class="conM ">
-<DIV style="clear: both;"></DIV>
-<DIV class="conM ">
-<H2>Experiment Results</H2>
-<P>Table 1 shows the benchmark data sets used in our experiments, you can download from the file list. 
-<!--Due to the space limit, other experimental results are not shown here, you can get details from Download.-->
-</P>
-<P align="center"><B>Table 1: DATA SETS USED IN THE EXPERIMENTS</B></P>
-<P>
-<TABLE width="700" align="center" class=" borderColumns borderRows tableBorder" 
-cellSpacing="0" cellPadding="0">
-  <TBODY>
-  <TR>
-   <th rowspan="2">Dataset</th>
-    <th rowspan="2">domain</th>
-    <th colspan="2">Instances</th>
-    <th colspan="2">Attributes</th>
-    <th rowspan="2"> Labels</th>
-    <th rowspan="2"> Label Cardinality</th>
-    <th rowspan="2">Laebl Density</th>
-  </TR>
-  <TR>
-    <TD align="center"><B>train</B></TD>
-    <TD align="center"><B>test</B></TD>
-    <TD align="center"><B>discrete</B></TD>
-    <TD align="center"><B>numerical</B></TD>
-  </TR>
-   <TR>
     <TD align="center"><B><A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/mediamill.rar" 
 target="_new">Mediamill</A></B></TD>
     <TD align="center"><B>vedio</B></TD>
@@ -301,24 +198,25 @@ cellSpacing="0" cellPadding="0">
 <P> Please decompress the <B>feasel</B> zip file, and put this folder under the directory of "src" folder at mulan project. In our project, we put the file ML_MRMR_FSClassification.java in the folder 
 of "/src/mulan/examples", and it has the main function. You can use the following demos to run our approach.
 <P>Demo: how to install our approach using MLRDT as the base classifier, in this case, we select the Corel16k010 data set as a demo data set;
+
 ```Java
 public static void main(String[] args) throws Exception {
- *******Classify by MLRDT after ML-MRMR-Feature selection**************/
- String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
- ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
- mcf.InitComParms(comParms);
- String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","- xml","Corel16k010.xml","-attrSize","644", "-labelNum","144", "-minS", "4", "-treeNum", "10", "-simElvType", "Jaccard", "-bDiscretized",  "false", "-bAvgVoting", "true"};
- mcf.ML_MRMR_FS_ClassifyByMLRDT(options);
+	/*********Classify by MLRDT after ML-MRMR-Feature selection**************/
+	String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+	ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+	mcf.InitComParms(comParms);
+	String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml", "-attrSize","644", "-labelNum","144", "-minS", "4", "-treeNum", "10", "-simElvType", "Jaccard", "-bDiscretized", "false", "-bAvgVoting", "true"};
+	mcf.ML_MRMR_FS_ClassifyByMLRDT(options);
 }
 
 Demo: how to install our approach using MLKNN as the base classifier;
 
 public static void main(String[] args) throws Exception {
-  /****************Classify by mulan after ML-MRMR-Feature selection**********************/
-  String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
-  ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
-  mcf.InitComParms(comParms);
-  String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml","-attrSize","644", "-labelNum","144", "-simElvType", "Jaccard", "-algType", "MLKNN", "-bDiscretized", "false","-bAvgVoting", "true"};
-ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
-mcf.ML_MRMR_FS_ClassifyByMulan(options);
+      /****************Classify by mulan after ML-MRMR-Feature selection**********************/
+      String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+      ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+      mcf.InitComParms(comParms);
+      String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml","-attrSize","644", "-labelNum","144", "-simElvType", "Jaccard", "-algType", "MLKNN", "-bDiscretized", "false","-bAvgVoting", "true"};
+      ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+      mcf.ML_MRMR_FS_ClassifyByMulan(options);
 }
