@@ -1,9 +1,7 @@
 # FSbasedMultiLabelStreamClassification
-Max-Relevance and Min-Redundancy based Multi-label Data Stream Classification with Concept Drifting Detection
-<P>Multi-label data stream classification is a very challenging and significant task especially in the handling of high-
-dimensional data streams with concept drifts. However, this
-challenge has received little attention from the research community. Therefore, we propose a max-relevance and min-
-redundancy based algorithm adaptation approach for the efficient and effective classification on multi-label data streams
+<B>Max-Relevance and Min-Redundancy based Multi-label Data Stream Classification with Concept Drifting Detection</B>
+<P>Multi-label data stream classification is a very challenging and significant task especially in the handling of high-dimensional data streams with concept drifts. However, this
+challenge has received little attention from the research community. Therefore, we propose a max-relevance and min-redundancy based algorithm adaptation approach for the efficient and effective classification on multi-label data streams
 with high-dimensional attributes and concept drifts1. In order to reduce the impact from high-dimensional attributes
 with noisy attributes, we first refine the minimal-redundancy-maximal-relevance criterion based on mutual information
 to select qualified features. Secondly, we propose the label
@@ -15,8 +13,7 @@ multi-label classification methods as base classifiers.</P>
 
 <H2>Our Approach</H2>
 <P>Contrary to the above approaches, filter approaches are
-independent of any classification algorithm, and they usually evaluate the usefulness of a feature, or a set of fea-
-tures, through measures of distance (Reyes, CarlosMorell,
+independent of any classification algorithm, and they usually evaluate the usefulness of a feature, or a set of features, through measures of distance (Reyes, CarlosMorell,
 and Ventura 2015), dependency, information or correlation
 on data (Lin et al. 2016). Thus, the biases of learning algorithms do not influence feature selection, and meanwhile
 they have the advantage of being fast and simple to implement. However, all aforementioned approaches are batch
@@ -27,9 +24,8 @@ Therefore, in this paper we aim to design an efficient and effective classificat
 multi-label data stream with concept drifts. To the best of
 our knowledge, this is the first feature selection based classification approach for multi-label data streams with high
 dimensional features and concept drifts. </P>
-<P>Our main contributions of this paper are as follows</P>
-<P>First, our approach can produce the higher accuracy of
-feature selection. In terms of advantages of the AA multilabel learning approach and the filter approach, we still aim
+<P><B>Our main contributions of this paper are as follows.</B></P>
+<P>First, our approach can produce the higher accuracy of feature selection. In terms of advantages of the AA multilabel learning approach and the filter approach, we still aim
 at designing and implementing a novel extension-type filter FS approach for multi-label data stream classification.
 Unlike existing multi-label filter FS approaches (Lin et al.
 2016), we use a sliding window to build an ensemble model incrementally for adapting to multi-label data streams, and then we give the analysis of generalization error of
@@ -40,8 +36,7 @@ ed in the feature selection.</P>
 
 <P>Second, our approach can detect concept drifts hidden in
 multi-label data streams. To track concept drifts hidden in
-multi-label data streams, we propose a concept drifting detection method based on the label distribution and the fea-
-ture distribution. It is capable of capturing concept drifts in multi-label data streams effectively. Contrary to the
+multi-label data streams, we propose a concept drifting detection method based on the label distribution and the feature distribution. It is capable of capturing concept drifts in multi-label data streams effectively. Contrary to the
 classification-error based concept drifting detection method
 in the data stream classification such as (Gama et al. 2014;
 Frias-Blanco et al. 2015), we define the difference of data
@@ -56,8 +51,7 @@ FS approaches depend on the size of the whole multi-label
 data set or the square value. Thus, our approach is more efficient and scalable.</P>
 <H2>Data Set </H2>
 <P><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
-target="_new"> Benchark data sets</A>: In our experiments, we select six large scale benchmark multi-label databases from different application domains to simulate the multi-label data stream. De-
-tails of these data sets are listed in Table 1, where Label-
+target="_new"> Benchark data sets</A>: In our experiments, we select six large scale benchmark multi-label databases from different application domains to simulate the multi-label data stream. Details of these data sets are listed in Table 1, where Label-
 Cardinality is the average number of labels in a database
 while Label-Density is the average number of labels in a
 database divided by the label count L.</P>
@@ -177,7 +171,6 @@ target="_new"> ML_MRMR_FSClassification</A>  java file.</P>
 <TABLE width="700" align="left" class=" borderColumns borderRows tableBorder" 
 cellSpacing="0" cellPadding="0">
   <TBODY>
-  <TR><TD align="center"><B>/******Parameter Discription***********/</B></TD></TR>
 	 <TR><TD align="left"><B>"-alph": the threshold used in the selection on an optimal subset in MRMR based feature selection, default alph = 0.2;</B></TD></TR>
 	 <TR><TD align="left"><B>"-blta": the threshold used in the drifting detection based on the class distribution: default blta = 0.2;</B></TD></TR>
 	 <TR><TD align="left"><B>"-gamma": the threshold used in the drifting detection based on the feature distribution: default gamma = 0.2;</B></TD></TR>
@@ -203,24 +196,22 @@ of "/src/mulan/examples", and it has the main function. You can use the followin
 
 ```Java
 public static void main(String[] args) throws Exception {
-		/*********Classify by MLRDT after ML-MRMR-Feature selection**************/
-		String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
-		ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
-		mcf.InitComParms(comParms);
-		String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml",
-			"-attrSize","644", "-labelNum","144", "-minS", "4", "-treeNum", "10", "-simElvType", "Jaccard", "-bDiscretized", "false", "-bAvgVoting", "true"};
-		mcf.ML_MRMR_FS_ClassifyByMLRDT(options);
+ *******Classify by MLRDT after ML-MRMR-Feature selection**************/
+ String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+ ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+ mcf.InitComParms(comParms);
+ String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","- xml","Corel16k010.xml","-attrSize","644", "-labelNum","144", "-minS", "4", "-treeNum", "10", "-simElvType", "Jaccard", "-bDiscretized",  "false", "-bAvgVoting", "true"};
+ mcf.ML_MRMR_FS_ClassifyByMLRDT(options);
 }
 
 Demo: how to install our approach using MLKNN as the base classifier;
 
 public static void main(String[] args) throws Exception {
-	  /****************Classify by mulan after ML-MRMR-Feature selection**********************/
-	  String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
-	  ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
-		mcf.InitComParms(comParms);
-      String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml",
-			"-attrSize","644", "-labelNum","144", "-simElvType", "Jaccard", "-algType", "MLKNN", "-bDiscretized", "false","-bAvgVoting", "true"};
-		ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
-		mcf.ML_MRMR_FS_ClassifyByMulan(options);
-	}
+  /****************Classify by mulan after ML-MRMR-Feature selection**********************/
+  String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+  ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+  mcf.InitComParms(comParms);
+  String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml","-attrSize","644", "-labelNum","144", "-simElvType", "Jaccard", "-algType", "MLKNN", "-bDiscretized", "false","-bAvgVoting", "true"};
+ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+mcf.ML_MRMR_FS_ClassifyByMulan(options);
+}
