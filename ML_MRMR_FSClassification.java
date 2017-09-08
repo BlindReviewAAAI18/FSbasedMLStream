@@ -60,46 +60,46 @@ import mulan.dice.tree.structure.Node;
 /**
  * ML_MRMR_FeatureSelection_DataStreamClassification
  * 
- * @author junfeng Liu and Peipei Li
+ * 
  * @date Jan. 2017
  * @project MultiLabel
  */
 public class ML_MRMR_FSClassification {
-	// the number of class values, added by v-pli May 27, 2017
+	// the number of class values, added on  May 27, 2017
 	int classValNum = 2;
-	// the number of discretized attribute values, added by v-pli May 22, 2017
+	// the number of discretized attribute values, added on  May 22, 2017
 	int discretValNum = 2;
 	// the threshold used in the drifting detection
 	double blta = 0.2;
 	// the threshold used in the distance evaluation of label distribution based on hamloss and cosine  
 	double gamma = 0.3;
-	// 待选特征的数量
+	// the number of selected features
 	public int nfea = 20;
-	// the ratio of candidate features, added by v-pli May 11, 2017
+	// the ratio of candidate features, added on  May 11, 2017
 	public double alph = 0.2;
-	// 选择的方式
+	// the selection type
 	public SELECT_METHOD selectMethod = SELECT_METHOD.MID;
-	// 离散化
+	// discreterization
 	public double discretize = 0.5;
-	// 一个数据块的大小
+	// the size of a data chunk
 	int dataBlock = 100;//200000;
-	// 文件路径
+	// the directory of file
 	public String filePath;
 	// training-arff
 	public String trainArff;
 	// testing-arff
 	public String testArff;
-	// xml文件名
+	// xml file
 	public String xmlFile;
-	// 类标签的其实位置
+	// the beggining index of labels
 	public int startIndex;
-	// 类标签的结束位置
+	// the ending index of labels
 	public int endIndex;
 	// the number of models in the ensemble model 
 	public int modelSize = 100;
-	//store the  feature sets selected for all data chunks --- added by v-pli May 15, 2017
+	//store the  feature sets selected for all data chunks --- added on  May 15, 2017
 	public HashMap<Integer,Double> featureSetOfChunks = new HashMap<Integer,Double>();
-	//added by v-pli May 22, 2017, for cosine computation
+	//added on  May 22, 2017, for cosine computation
 	//Map<Integer, Double[]> labelDistVerMap =  null;
 	public static void main(String[] args) throws Exception {
 		String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
@@ -277,7 +277,7 @@ public class ML_MRMR_FSClassification {
 				tmpValueArr = chunkInsts.get(j).toDoubleArray();
 				aLabelDist[j] = (double)tmpValueArr[k];
 			}
-//			for ( int j = chunkInsts.size(); j< dataBlock; j++ )// deleted by v-pli May 22, 2017
+//			for ( int j = chunkInsts.size(); j< dataBlock; j++ )// deleted on  May 22, 2017
 //				aLabelDist[j] = 0.0;
 			
 			Arrays.sort(aLabelDist);// in an ascending sort
@@ -288,7 +288,7 @@ public class ML_MRMR_FSClassification {
 		return labelDistMap;
     }
     /**
-   	 * Do statistics of label distributions for cosine computation used in the concept drifting vertically, modified by v-pli May 27, 2017
+   	 * Do statistics of label distributions for cosine computation used in the concept drifting vertically, modified on  May 27, 2017
    	 * 
    	 * @param labelDistr 
    				 the given label distribution of instances
@@ -330,7 +330,7 @@ public class ML_MRMR_FSClassification {
        }
     /**
   	 * Do statistics for label distributions used in the concept drifting Horizontally
-  	 * added by v-pli May 04, 2017, modified by v-pli May 22, 2017
+  	 * added on  May 04, 2017, modified on  May 22, 2017
   	 * @param chunkInsts 
   				 the given instances
   	 * @return the distribution of class labels for each instance
@@ -645,13 +645,13 @@ public class ML_MRMR_FSClassification {
     	// whether using the average voting prediction results
     	boolean bAvgVoting = Boolean.valueOf(Utils.getOption("bAvgVoting", options)).booleanValue();
     	System.out.println("bAvgVoting = "+bAvgVoting);
-    	startIndex = attrSize-labelNum;//- 1;--modified by v-pli Feb. 04, 2017 
+    	startIndex = attrSize-labelNum;//- 1;--modified on  Feb. 04, 2017 
     	endIndex = attrSize - 1;
     	System.out.println("classIndex-beg-end:"+startIndex+"-"+endIndex);
-    	//alph = Double.valueOf(Utils.getOption("alph", options)); // added by v-pli May 11, 2017
+    	//alph = Double.valueOf(Utils.getOption("alph", options)); // added on  May 11, 2017
     	//System.out.println("alph = "+alph);
     	
-    	// specify the number of selected features, added by v-pli May 11, 2017
+    	// specify the number of selected features, added on  May 11, 2017
     	nfea = (int) (alph*(attrSize-labelNum));
     	System.out.println("selected features: "+nfea+":"+alph);
     	// Ensemble model in the list structure
@@ -706,7 +706,7 @@ public class ML_MRMR_FSClassification {
 		 // store the data distributions of class labels
 		 ArrayList<Map<Integer, Double[]>> labelDistVerMapArr = new ArrayList<Map<Integer, Double[]>>();
 		 ArrayList<ArrayList<int[]>> labelDistHorMapArr = new ArrayList<ArrayList<int[]>>(); 
-		 System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");//added by v-pli Feb. 10, 2017
+		 System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");//added on  Feb. 10, 2017
 		/***********Train the model by data chunks****************/
 		long newbeginTime = System.currentTimeMillis();
 		long trainTime = 0;
@@ -761,9 +761,9 @@ public class ML_MRMR_FSClassification {
 				if ( i == 6  ){
 					System.out.println(i);
 				}
-				similarModels = driftDetectionByLabelDistr(testWriter,labelDistVerMapArr, labelDistVerMap,labelDistHorMapArr, labelDistHorMap, labelNum);// added by v-pli May 04, 2017
+				similarModels = driftDetectionByLabelDistr(testWriter,labelDistVerMapArr, labelDistVerMap,labelDistHorMapArr, labelDistHorMap, labelNum);// added on  May 04, 2017
 				//similarModels = driftDetectionByLabelDistrByCosine(labelDistVerMapArr, labelDistVerMap, labelNum);
-				//similarModels = driftDetectionByLabelDistrByHam(labelDistHorMapArr, labelDistHorMap, labelNum);// added by v-pli May 04, 2017
+				//similarModels = driftDetectionByLabelDistrByHam(labelDistHorMapArr, labelDistHorMap, labelNum);// added on  May 04, 2017
 				
 				drifInforObj = similarModels.getLast();
 				oldestDrifInforObj = similarModels.getFirst();
@@ -897,7 +897,7 @@ public class ML_MRMR_FSClassification {
 
 		}
 		//trainWriter.close();
-		// added by v-pli May 15, 2017
+		// added on  May 15, 2017
 		 Iterator it = featureSetOfChunks.keySet().iterator();  
 		 int key = 0;
 		 double tmpVal = 0;
@@ -1186,7 +1186,7 @@ public class ML_MRMR_FSClassification {
 		// FileReader reader = new FileReader(filePath+"\\"+srcFile);
 		 DataSource ds = new DataSource(filePath+"\\"+srcFile);
 		 Instances data = ds.getDataSet();
-		 int startIndex = attrSize - labelNum ;//- 1;--modified by v-pli Feb. 04, 2017 
+		 int startIndex = attrSize - labelNum ;//- 1;--modified on  Feb. 04, 2017 
 		 int endIndex = attrSize - 1;
 		 String line = "";
 		 for ( int i = 0; i < data.size(); i++ ){
@@ -1204,7 +1204,7 @@ public class ML_MRMR_FSClassification {
 	 * @return List<Measure> measures
 	 */
 	private List<Measure> InitMeasures(){
-		List<Measure> measures = new ArrayList<Measure>(9); // added by v-pli Feb. 04， 2017
+		List<Measure> measures = new ArrayList<Measure>(9); // added on  Feb. 04， 2017
 		measures.add(new HammingLoss());
 		measures.add(new OneError());
 		measures.add(new Coverage());
@@ -1241,7 +1241,7 @@ public class ML_MRMR_FSClassification {
 		boolean bDiscretized;
 		// set the evaluation measures
 		Evaluator eval = new Evaluator();
-		List<Measure> measures = InitMeasures(); // added by v-pli Feb. 04， 2017
+		List<Measure> measures = InitMeasures(); // added on  Feb. 04， 2017
 		 // store the data distributions of class labels
 		 ArrayList<Map<Integer, Double[]>> labelDistMapArr = new ArrayList<Map<Integer, Double[]>>();
 		// store the non-zero values of attributes for multiple data chunks
@@ -1264,7 +1264,7 @@ public class ML_MRMR_FSClassification {
 		// whether using the average voting prediction results
 		boolean bAvgVoting = Boolean.valueOf(Utils.getOption("bAvgVoting", options)).booleanValue();
 		
-		startIndex = attrSize - labelNum ;//- 1;--modified by v-pli Feb. 04, 2017 
+		startIndex = attrSize - labelNum ;//- 1;--modified on  Feb. 04, 2017 
 		endIndex = attrSize - 1;
 		System.out.println("classIndex-beg-end:"+startIndex+"-"+endIndex);
 		// 构建Instances块用来进行特征选择（后面会转成MultiInstances）
@@ -1517,7 +1517,7 @@ public class ML_MRMR_FSClassification {
 				endIndex);
 		mrmr.setDatas(datas);
 		long endTime = 0;
-		if (bDiscretized && discretize != 9999.0) { // modified by v-pli Feb. 07, 2017
+		if (bDiscretized && discretize != 9999.0) { // modified on  Feb. 07, 2017
 			// 调用MultiInstances中的离散化的方法
 			mrmr.getDatas().discretize(discretize, startIndex, endIndex);
 			endTime = System.currentTimeMillis();
@@ -1531,9 +1531,9 @@ public class ML_MRMR_FSClassification {
 		 endTime = System.currentTimeMillis();
 	     System.out.println("feature select time on instances with size of "+blockInsts.numInstances()+":"+(endTime-beginTime)+"ms");
 		// 经过特征选择之后的名字
-		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified by v-pli Feb. 4
+		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified on  Feb. 4
 	    // datas.getDataSet()-->is discretized data chunk
-		//String fsFile = mrmr.toArffFile(mrmr.getDatas().getDataSet(), feaInd, filePath, nChunk);//---modified by v-pli Feb. 4
+		//String fsFile = mrmr.toArffFile(mrmr.getDatas().getDataSet(), feaInd, filePath, nChunk);//---modified on  Feb. 4
 		MultiLabelInstances fsBlockInsts = new MultiLabelInstances(filePath
 				+ "/SelectedArff/" + fsFile, filePath + "/" + xmlFile);
 		
@@ -1573,28 +1573,28 @@ public class ML_MRMR_FSClassification {
 		
 		mrmr.setDatas(datas);
 		long endTime = 0;
-		if (bDiscretized && discretize != 9999.0) { // modified by v-pli Feb. 07, 2017
+		if (bDiscretized && discretize != 9999.0) { // modified on  Feb. 07, 2017
 			// 调用MultiInstances中的离散化的方法
 			mrmr.getDatas().discretize(discretize, startIndex, endIndex);
 			endTime = System.currentTimeMillis();
 		    System.out.println("discretization time: "+(endTime-beginTime)+"ms");
-		   // added by v-pli May 21, 2017----output the discretized data
+		   // added on  May 21, 2017----output the discretized data
 		/*    int[] allFeaInd = new int [nfea];
 		    mrmr.getDatas().OutputDiscretizedData(filePath, startIndex, endIndex, allFeaInd);
 		    //mrmr.toArffFile(mrmr.getDatas().getDataSet(), allFeaInd, filePath, -1);
 		    System.out.println("output all discretized data.");
 		    return null;*/
 		    
-		    discretValNum = 3;// added by v-pli May 22, 2017
+		    discretValNum = 3;// added on  May 22, 2017
 		}
 	
 			
-		//added by v-pli May 22, 2017---label distributuon statitsitcs for cosine computation
+		//added on  May 22, 2017---label distributuon statitsitcs for cosine computation
 		if ( bInTraining ){
 			long tmpStartTime = System.currentTimeMillis();
 			mrmr.getDatas().DoLabelDistrStats(startIndex, endIndex);
 			//labelDistVerMap = 
-			DoLabelDistrStatisticsForCosine(labelDistVerMap, mrmr.getDatas().getLabelDist(),classValNum,blockInsts.size());//discretValNum); modified by v-pli May 27, 2017
+			DoLabelDistrStatisticsForCosine(labelDistVerMap, mrmr.getDatas().getLabelDist(),classValNum,blockInsts.size());//discretValNum); modified on  May 27, 2017
 			long tmpEndTime = System.currentTimeMillis();
 			
 			System.out.println(labelDistVerMap.size()+"--The time of DoLabelDistrStats for cosine computation:"+(tmpEndTime-tmpStartTime)+"ms");
@@ -1603,11 +1603,11 @@ public class ML_MRMR_FSClassification {
 	     //BufferedWriter bw = new BufferedWriter(new FileWriter(filePath+"/featureSelection"+indexChunk+".txt"));
 	     int[] tmpFeaInd = mrmr.mRMRSelect(bwFS, scoreArr, indexChunk);
 	     double tmpVal = 0;
-		 //added by v-pli May 15, 2017---deleted by v-pli May 20, 2017
+		 //added on  May 15, 2017---deleted on  May 20, 2017
     	// Set<Integer> keySet = featureSetOfChunks.keySet();
 	     for ( int i = 0; i < tmpFeaInd.length; i++ ){
 	    	 feaInd[i] = tmpFeaInd[i];
-	    	 //added by v-pli May 15, 2017
+	    	 //added on  May 15, 2017
 //	    	 if (i < nfea)
 //	    	 {
 //		    	 if ( keySet.contains(feaInd[i]) ){
@@ -1622,7 +1622,7 @@ public class ML_MRMR_FSClassification {
 		 endTime = System.currentTimeMillis();
 	     System.out.println("feature select time on instances with size of "+blockInsts.numInstances()+":"+(endTime-beginTime)+"ms");
 		// 经过特征选择之后的名字
-		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified by v-pli Feb. 4
+		String fsFile = mrmr.toArffFile(blockInsts, feaInd, filePath, indexChunk);//---modified on  Feb. 4
 		ArffReader rd = new ArffReader();
 		System.out.println(filePath+"\\SelectedArff\\"+fsFile);
 		rd.setFilePath(filePath+"\\SelectedArff\\"+fsFile);
@@ -1681,7 +1681,7 @@ public class ML_MRMR_FSClassification {
 	
 	/**
 	 * drifting detection between the current data chunk and each history data chunk, and return the drift type, such as "drift, no-drift, noisy impact"
-	 * modified by v-pli May 04, 2017
+	 * modified on  May 04, 2017
 	 * @param labelDistMapArr 
 				 the label distributions of all histroy data chunks in ensemble model
 	 * @param curLabelDistrMap
@@ -1833,18 +1833,18 @@ public class ML_MRMR_FSClassification {
 		double ham = 0;
 		Integer key = 0;
 		//for ( int i = nHistoryChunks-1; i >= 0; i-- ){ 
-		for ( int i = 0; i < nHistoryChunks; i++ ){ // modified by v-pli May 23, 2017
+		for ( int i = 0; i < nHistoryChunks; i++ ){ // modified on  May 23, 2017
 			preLabelDistrList = labelDistListArr.get(i);
 			preLabelDistrMap = labelDistMapArr.get(i);
 			cosineDist = 0;
 			
 			Iterator<Integer> iter = curLabelDistrMap.keySet().iterator();
 
-			while (iter.hasNext()) { // modified by v-pli May 27, 2017
+			while (iter.hasNext()) { // modified on  May 27, 2017
 			    key = iter.next();
 			    cosineDist += 1-simElvFun.Cosine(preLabelDistrMap.get(key), curLabelDistrMap.get(key));
 			}
-//			for ( int j = 0; j < curLabelDistrMap.size(); j++ ){ // modified by v-pli May 11, 2017, deleted May 27, 2017
+//			for ( int j = 0; j < curLabelDistrMap.size(); j++ ){ // modified on  May 11, 2017, deleted May 27, 2017
 //				cosineDist += 1-simElvFun.Cosine(preLabelDistrMap.get(j), curLabelDistrMap.get(j));
 //			}
 			if ( curLabelDistrMap.size() > 0 ){
@@ -1863,7 +1863,7 @@ public class ML_MRMR_FSClassification {
 			sim =  1- 2*cosineDist*ham/(cosineDist+ham+0.000000000000000000001);
 			// output the similarity between recent two data chunks
 			if ( i == nHistoryChunks-1 ){
-				if ( ham > 1-gamma ){//added by v-pli May 23, 2017
+				if ( ham > 1-gamma ){//added on  May 23, 2017
 					testWriter.write("||ham = \t"+ham+"\tdrift"+"\tcosineDist = \t"+cosineDist+"\tsim = \t"+sim+"\t");
 					System.out.println("||ham = \t"+ham+"\tdrift"+"\tcosineDist = \t"+cosineDist+"\tsim = \t"+sim+"\t");
 				}
@@ -1929,7 +1929,7 @@ public class ML_MRMR_FSClassification {
 		driftInfor obj = null;
 		int nHistoryChunks = 0;
 		int maxSimModelIndex = 0;
-		double maxSim = -1; // modified by v-pli May 22, 2017
+		double maxSim = -1; // modified on  May 22, 2017
 		LinkedList<driftInfor> similarModels = new LinkedList<driftInfor>();
 		Map curMap = generateMap(curFeaInd, curScoreArr, curnonZeroAttrMap);
 		Map preMap = null;
@@ -1982,7 +1982,7 @@ public class ML_MRMR_FSClassification {
 			maxSimModelIndex = nHistoryChunks-1;//
 			Map<Integer,Integer> prenonZeroAttrMap = null;
 			//for ( int i = nHistoryChunks-1; i >= 0; i-- ){ // according the time stamp, find a model/chunk with similar data distribution
-			for ( int i = 0; i < nHistoryChunks; i++ ){ // modified by v-pli May 23, 2017， 
+			for ( int i = 0; i < nHistoryChunks; i++ ){ // modified on  May 23, 2017， 
 				prenonZeroAttrMap = nonZeroAttrMapList.get(i);
 				preMap = generateMap(feaIndList.get(i), feaScoreList.get(i),prenonZeroAttrMap);
 				SimilarityEvaluation simElvFun = new SimilarityEvaluation();
@@ -2137,7 +2137,7 @@ public class ML_MRMR_FSClassification {
 			treeBuilder.setClsSize(labelNum);
 			treeBuilder.init();
 			Node[] trees = treeBuilder.buildTrees(treeNum);
-			// added by peipeili 11-06-13
+			// added on  11-06-13
 			System.out.println("training-over");
 		    long endTime = System.currentTimeMillis();
 		    System.out.println("train-time:"+(endTime-beginTime));
