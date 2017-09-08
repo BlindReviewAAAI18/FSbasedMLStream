@@ -146,7 +146,7 @@ while Label-Density is the average number of labels in a
 database divided by the label count L.</P>
 
 <H2>Experiment Results</H2>
-<P>Table 1 shows the benchmark data sets used in our experiments. 
+<P>Table 1 shows the benchmark data sets used in our experiments, you can download from the file list. 
 <!--Due to the space limit, other experimental results are not shown here, you can get details from Download.-->
 </P>
 <P align="center"><B>Table 1: DATA SETS USED IN THE EXPERIMENTS</B></P>
@@ -170,7 +170,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>numerical</B></TD>
   </TR>
    <TR>
-    <TD align="center"><B>Mediamill</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">Mediamill</B></TD>
     <TD align="center"><B>vedio</B></TD>
     <TD align="center"><B>30993</B></TD>
     <TD align="center"><B>12914</B></TD>
@@ -181,7 +182,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>0.043</B></TD>
   </TR>
   <TR>
-    <TD align="center"><B>IMDB-ECC-F</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">IMDB-ECC-F</B></TD>
     <TD align="center"><B>Movie</B></TD>
     <TD align="center"><B>76143</B></TD>
     <TD align="center"><B>19281</B></TD>
@@ -192,7 +194,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>0.036</B></TD>
   </TR>
   <TR>
-    <TD align="center"><B>Corel16k010</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">Corel16k010</B></TD>
     <TD align="center"><B>images</B></TD>
     <TD align="center"><B>13618</B></TD>
     <TD align="center"><B>6660</B></TD>
@@ -203,7 +206,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>0.017</B></TD>
   </TR>
    <TR>
-    <TD align="center"><B>NUS-WIDE</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">NUS-WIDE</B></TD>
     <TD align="center"><B>images</B></TD>
     <TD align="center"><B>161789</B></TD>
     <TD align="center"><B>107859</B></TD>
@@ -214,7 +218,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>0.023</B></TD>
   </TR>
   <TR>
-    <TD align="center"><B>EUR-Lex(subject matters)</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">EUR-Lex(subject matters)</B></TD>
     <TD align="center"><B>text</B></TD>
     <TD align="center"><B>17414</B></TD>
     <TD align="center"><B>1935</B></TD>
@@ -225,7 +230,8 @@ cellSpacing="0" cellPadding="0">
     <TD align="center"><B>0.011</B></TD>
   </TR>
   <TR>
-    <TD align="center"><B>bookmarks</B></TD>
+    <TD align="center"><B><A onclick="stc(this, 26)" href="http://mulan.sourceforge.net/datasets-mlc.html" 
+target="_new">bookmarks</B></TD>
     <TD align="center"><B>text</B></TD>
     <TD align="center"><B>70045</B></TD>
     <TD align="center"><B>17811</B></TD>
@@ -237,6 +243,71 @@ cellSpacing="0" cellPadding="0">
   </TR>
 </TBODY></TABLE>
 <P></P>
+       
+<DIV style="clear: both;"></DIV>
+<DIV class="conM ">
+<DIV style="clear: both;"></DIV>
+<DIV class="conM ">
+<H2>Source codes: Download</H2>
+<P>Our approach is implemented in an open-source Java library for learning from Multi-label data, called Mulan <A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/ML_MRMR_FSClassification.java" 
+target="_new">. Source codes of our approach include the feature selection for multi-label data stream in the <A onclick="stc(this, 26)" href="https://github.com/BlindReviewAAAI18/FSbasedMultiLabelStreamClassification/blob/master/feasel.rar" 
+target="_new"> feasel zip file </A>, and the ML_MRMR_FSClassification java file.</P>
+</DIV>
+<H2>Parameter Discription</H2>
+<P> 
+<TABLE width="700" align="center" class=" borderColumns borderRows tableBorder" 
+cellSpacing="0" cellPadding="0">
+  <TBODY>
+  <TR>
+    <TD align="center"><B>/******Parameter Discription***********/</B></TD>
+	<TD align="center"><B>"-alph": the threshold used in the selection on an optimal subset in MRMR based feature selection, default alph = 0.2;</B></TD>
+	<TD align="center"><B>"-blta": the threshold used in the drifting detection based on the class distribution: default blta = 0.2;</B></TD>
+	<TD align="center"><B>"-gamma": the threshold used in the drifting detection based on the feature distribution: default gamma = 0.2;</B></TD>
+	<TD align="center"><B>"-dataBlock": the size of a data chunk, default dataBlock = 200;</B></TD>
+	<TD align="center"><B>"-modelSize": the number of models in the ensemble model, default modelSize = 100;</B></TD>
+
+	<TD align="center"><B>"-path": the file directory;</B></TD>
+	<TD align="center"><B>"-arff": the source file;</B></TD>
+	<TD align="center"><B>"-test": the testing file: </B></TD>
+	<TD align="center"><B>"-attrSize": the size of feature space, namely the attribute count+the label count;</B></TD>
+	<TD align="center"><B>"-labelNum": the label count;</B></TD>
+	<TD align="center"><B>"-simElvType": the type of similarity evaluation, default value "Jaccard";</B></TD>
+	<TD align="center"><B>"-algType": the type of algorithms, default value "MLKNN";----it is useless if you select MLRDT as a base classifier;</B></TD>
+	<TD align="center"><B>"-bDiscretized": the flag of discretization, default "false";</B></TD>
+	<TD align="center"><B>"-bAvgVoting": the flag of voting, default "true";</B></TD>
+  </TR>
+</TBODY></TABLE>
+</P>
+<H2>Demo code "how to install our approach"</H2>
+<P> Please decompress the <B>feasel</B> zip file, and put this folder under the directory of "src" folder at mulan project. In our project, we put the file ML_MRMR_FSClassification.java in the folder 
+of "/src/mulan/examples", and it has the main function. You can use the following demos to run our approach.
+<P>Demo: how to install our approach using MLRDT as the base classifier, in this case, we select the Corel16k010 data set as a demo data set;
+
+```Java
+public static void main(String[] args) throws Exception {
+		/*********Classify by MLRDT after ML-MRMR-Feature selection**************/
+		String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+		ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+		mcf.InitComParms(comParms);
+		String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml",
+			"-attrSize","644", "-labelNum","144", "-minS", "4", "-treeNum", "10", "-simElvType", "Jaccard", "-bDiscretized", "false", "-bAvgVoting", "true"};
+		mcf.ML_MRMR_FS_ClassifyByMLRDT(options);
+}</P>
+<P>
+Demo: how to install our approach using MLKNN as the base classifier
+
+```Java
+public static void main(String[] args) throws Exception {
+	  /****************Classify by mulan after ML-MRMR-Feature selection**********************/
+	  String[] comParms = {"-alph", "0.2", "-blta", "0.2", "-gamma", "0.2", "-dataBlock", "200", "-modelSize", "100"};
+	  ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+		mcf.InitComParms(comParms);
+      String[] options = {"-path","H:/data/Corel16k010","-train","Corel16k010-train.arff-sort.arff","-test", "Corel16k010-test.arff","-xml","Corel16k010.xml",
+			"-attrSize","644", "-labelNum","144", "-simElvType", "Jaccard", "-algType", "MLKNN", "-bDiscretized", "false","-bAvgVoting", "true"};
+		ML_MRMR_FSClassification mcf = new ML_MRMR_FSClassification();
+		mcf.ML_MRMR_FS_ClassifyByMulan(options);
+	}
+</P>
        
 <DIV style="clear: both;"></DIV>
 <DIV class="conM ">
